@@ -31,4 +31,4 @@ It is easy  to use jsust following 3 steps :
 
  3: use SaveChageWithHistory Extention insted of SaveChages() Defualt methode:
  
-    bloggingContext.SaveChageWithHistory()
+    bloggingContext.SaveChangesWithHistory()
