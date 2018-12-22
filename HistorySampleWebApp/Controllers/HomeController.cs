@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using HistorySampleWebApp.Models;
 using HistorySampleWebApp.Service;
 using AutoHistoryCore;
+using Newtonsoft.Json;
 
 namespace HistorySampleWebApp.Controllers
 {
@@ -21,19 +22,20 @@ namespace HistorySampleWebApp.Controllers
 
         public IActionResult Index()
         {
-            // _db.students.Add(new Student() { age = 25, Name = "Mina" });
-            // // _db.SaveChanges();
-            // _db.SaveChangesWithHistory();
+            //_db.students.Add(new Student() { age = 25, Name = "SHIMA" });
+            //// _db.SaveChanges();
+            //_db.SaveChangesWithHistory();
 
-            //var student= _db.students.Where(c=>c.IsDeleted==false).FirstOrDefault();
-            // student.Name = "karim";
-            // _db.Update(student);
-            // _db.SaveChangesWithHistory();
-            var data = _db.students.Undelited<Student>().Where(c=>c.Name=="Shima").ToList();
+            var student = _db.students.Undelited<Student>().FirstOrDefault();
+            student.Name = "Amir";
+            _db.Update(student);
+            _db.SaveChangesWithHistory();
 
+            var History = _db.students.Undelited<Student>().FirstOrDefault().Hs_Change;
+            var data = JsonConvert.DeserializeObject<List<List<HistoryViewModel>>>(History);
             //_db.teachers.Add(new Teacher() { Level = 20, Name = "John Doe" });
             //_db.SaveChangesWithHistory();
-            return View();
+            return Json(data);
         }
 
         public IActionResult About()

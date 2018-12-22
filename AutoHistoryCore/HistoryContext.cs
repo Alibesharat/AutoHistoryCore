@@ -1,13 +1,15 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace AutoHistoryCore
 {
-    public static class HistoryContext
+    public static class DbContextExtention
     {
         /// <summary>
         /// رکورد های حذف نشده
@@ -16,7 +18,7 @@ namespace AutoHistoryCore
         /// <param name="set"></param>
         /// <returns></returns>
         public static IQueryable<TEntity> Undelited<TEntity>(this DbSet<TEntity> set)
-       where TEntity :  HistoryBaseModel
+       where TEntity : HistoryBaseModel
         {
             var data = set.AsNoTracking().Where(e => e.IsDeleted == false);
             return data.AsQueryable();
@@ -36,8 +38,25 @@ namespace AutoHistoryCore
                 try
                 {
                     HistoryBaseModel model = (HistoryBaseModel)entity.Entity;
+                    HistoryViewModel vm = new HistoryViewModel()
+                    {
+                        AgentIp = "",
+                        AgentOs = "",
+                        DateTime = DateTime.Now,
+                        State = entity.State
 
-                   
+                    };
+                    List<List<HistoryViewModel>> ls = new List<List<HistoryViewModel>>();
+                    List<HistoryViewModel> data = new List<HistoryViewModel>();
+                    data.Add(vm);
+                    if (!string.IsNullOrWhiteSpace(model.Hs_Change))
+                    {
+                        ls = JsonConvert.DeserializeObject<List<List<HistoryViewModel>>>(model.Hs_Change);
+
+
+                    }
+                    ls.Add(data);
+                    var JSON = JsonConvert.SerializeObject(ls);
                     switch (entity.State)
                     {
 
@@ -47,23 +66,19 @@ namespace AutoHistoryCore
                             break;
                         case EntityState.Deleted:
                             model.IsDeleted = true;
-                            model.DeletedDatTime = DateTime.Now;
                             entity.State = EntityState.Modified;
                             break;
-
                         case EntityState.Modified:
-                            model.IsDeleted = false;
-                            model.LastEditedDateTime = DateTime.Now;
                             break;
                         case EntityState.Added:
                             model.IsDeleted = false;
-                            model.CrearedDateTime = DateTime.Now;
                             break;
                         default:
                             break;
                     }
+                    model.Hs_Change = JSON;
                 }
-                catch
+                catch 
                 {
 
                     ;
