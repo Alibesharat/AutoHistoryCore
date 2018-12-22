@@ -4,12 +4,7 @@ AutoSaveChangeHistory
 
 An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history.
 
-
 AutoHistoryCore will recording all the data changing history in Your tables
-
-you must drive your models from HistoryBaseModel
-
-HistoryBasemodel Will Add some property to track Model Changes
 
 How To Install:
 
