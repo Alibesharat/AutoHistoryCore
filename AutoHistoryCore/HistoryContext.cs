@@ -37,8 +37,7 @@ namespace AutoHistoryCore
                 {
                     HistoryBaseModel model = (HistoryBaseModel)entity.Entity;
 
-                    model.LastAccesDevice = "";
-                    model.LastAccessIp = "";
+                   
                     switch (entity.State)
                     {
 
