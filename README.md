@@ -20,7 +20,7 @@ Run the following command in the Package Manager Console to install Microsoft.En
 How To Use :
 It is easy  to use jsust following 3 steps :
 
-1: drive your Model from HistoryBaseModel Wanna to be Track Change History:
+1: drive your Model from HistoryBaseModel 
 
     public class MyModel:HistoryBaseModel
     {
