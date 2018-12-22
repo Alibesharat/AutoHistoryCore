@@ -28,14 +28,14 @@ namespace HistorySampleWebApp.Controllers
             var student = _db.students.FirstOrDefault();
             //_db.Entry<Student>(student).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
 
-            student.Name = "Amira";
+            student.Name = "aLIA";
             student.IsDeleted = false;
            _db.Update(student);
             //_db.students.Remove(student);
-
-            _db.SaveChangesWithHistory();
+           // string ip =HttpContext.Connection.RemoteIpAddress.ToString();
+            _db.SaveChangesWithHistory(HttpContext);
            /// _db.Entry<Student>(student).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-
+           string  userAgent =HttpContext.Request.Headers["User-Agent"];
             //_db.students.Remove(student);
             //_db.SaveChangesWithHistory();
             var History = _db.students.FirstOrDefault().Hs_Change;
