@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
 
 namespace AutoHistoryCore
@@ -37,26 +38,27 @@ namespace AutoHistoryCore
             {
                 try
                 {
+                    
                     HistoryBaseModel model = (HistoryBaseModel)entity.Entity;
                     HistoryViewModel vm = new HistoryViewModel()
                     {
                         AgentIp = "",
                         AgentOs = "",
                         DateTime = DateTime.Now,
-                        State = entity.State
+                        State = entity.State.ToString()
 
                     };
-                    List<List<HistoryViewModel>> ls = new List<List<HistoryViewModel>>();
+                    //List<List<HistoryViewModel>> ls = new List<List<HistoryViewModel>>();
                     List<HistoryViewModel> data = new List<HistoryViewModel>();
-                    data.Add(vm);
                     if (!string.IsNullOrWhiteSpace(model.Hs_Change))
                     {
-                        ls = JsonConvert.DeserializeObject<List<List<HistoryViewModel>>>(model.Hs_Change);
+                        data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(model.Hs_Change);
 
 
                     }
-                    ls.Add(data);
-                    var JSON = JsonConvert.SerializeObject(ls);
+                    data.Add(vm);
+
+                    var JSON = JsonConvert.SerializeObject(data);
                     switch (entity.State)
                     {
 
@@ -88,5 +90,7 @@ namespace AutoHistoryCore
 
             return db.SaveChanges();
         }
+
+
     }
 }
