@@ -1,14 +1,11 @@
-﻿using System;
+﻿using AutoHistoryCore;
+using HistorySampleWebApp.Models;
+using HistorySampleWebApp.Service;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HistorySampleWebApp.Models;
-using HistorySampleWebApp.Service;
-using AutoHistoryCore;
-using Newtonsoft.Json;
-using UAParser;
 
 namespace HistorySampleWebApp.Controllers
 {
