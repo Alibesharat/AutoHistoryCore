@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>3.0.0</Version>
+    <PackageProjectUrl>https://github.com/Alibesharat/AutoHistoryCore</PackageProjectUrl>
+    <Copyright></Copyright>
+    <PackageLicenseUrl>https://github.com/Alibesharat/AutoHistoryCore/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>Entity Framework Core, entity-framework-core, EF Data, Auto History, auto-history,Soft Delete,Soft-Delete,logical-delete,logical delete</PackageTags>
+    <RepositoryUrl>https://github.com/Alibesharat/AutoHistoryCore</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
