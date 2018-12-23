@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using UAParser;
 
 
 namespace AutoHistoryCore
@@ -96,10 +97,10 @@ namespace AutoHistoryCore
         public static int SaveChangesWithHistory(this DbContext db, HttpContext httpContext)
         {
             var entries = db.ChangeTracker.Entries().ToArray();
-            //var userAgent = httpContext.Request.Headers["User-Agent"];
-            //string uaString = Convert.ToString(userAgent[0]);
-            //var uaParser = Parser.GetDefault();
-            //ClientInfo c = uaParser.Parse(uaString);
+            string userAgent = httpContext.Request.Headers["User-Agent"];
+            var uaParser = Parser.GetDefault();
+            ClientInfo c = uaParser.Parse(userAgent);
+           
             string ip = httpContext.Connection.RemoteIpAddress.ToString();
             if(ip=="::1" || ip== "127.0.0.1")
             {
@@ -119,7 +120,8 @@ namespace AutoHistoryCore
                     HistoryViewModel vm = new HistoryViewModel()
                     {
                         AgentIp = ip,
-                        AgentOs = "",
+                        AgentOs = c.OS.ToString(),
+                        AgentBrowser = c.UserAgent.ToString(),
                         DateTime = DateTime.Now,
                         State = entity.State.ToString()
 

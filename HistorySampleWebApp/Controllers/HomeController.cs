@@ -8,6 +8,7 @@ using HistorySampleWebApp.Models;
 using HistorySampleWebApp.Service;
 using AutoHistoryCore;
 using Newtonsoft.Json;
+using UAParser;
 
 namespace HistorySampleWebApp.Controllers
 {
@@ -35,7 +36,9 @@ namespace HistorySampleWebApp.Controllers
            // string ip =HttpContext.Connection.RemoteIpAddress.ToString();
             _db.SaveChangesWithHistory(HttpContext);
            /// _db.Entry<Student>(student).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-           string  userAgent =HttpContext.Request.Headers["User-Agent"];
+           
+           
+
             //_db.students.Remove(student);
             //_db.SaveChangesWithHistory();
             var History = _db.students.FirstOrDefault().Hs_Change;
