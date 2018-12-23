@@ -44,7 +44,7 @@ namespace HistorySampleWebApp.Controllers
                 var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 29);
                 _db.students.Remove(student);
 
-                //Safe-Delete(Logical Delete)
+                //soft-Delete(Logical Delete)
                 _db.SaveChangesWithHistory(HttpContext);
             }
             using (var _db = new DatabaseContext())
