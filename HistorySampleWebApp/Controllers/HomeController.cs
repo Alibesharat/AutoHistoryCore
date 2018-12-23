@@ -2,6 +2,7 @@
 using HistorySampleWebApp.Models;
 using HistorySampleWebApp.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,38 +12,59 @@ namespace HistorySampleWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private DatabaseContext _db;
-        public HomeController(DatabaseContext databaseContext)
+
+        public HomeController()
         {
-            _db = databaseContext;
+
         }
 
 
         public IActionResult Index()
         {
-           // _db.students.Add(new Student() { age = 25, Name = "Kamran" });
-            // _db.SaveChanges();
-           // _db.SaveChangesWithHistory();
-            var student = _db.students.FirstOrDefault();
-            //_db.Entry<Student>(student).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            using (var _db = new DatabaseContext())
+            {
+                //Add Item
+                _db.students.Add(new Student() { age = 25, Name = "John doe" });
+                _db.students.Add(new Student() { age = 30, Name = "raul costa" });
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                //Edit item
+                student.Name = "Eli tailor";
+                student.age = 29;
+                _db.Update(student);
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 29);
+                _db.students.Remove(student);
 
-            student.Name = "aLIA";
-            student.IsDeleted = false;
-           _db.Update(student);
-            //_db.students.Remove(student);
-           // string ip =HttpContext.Connection.RemoteIpAddress.ToString();
-            _db.SaveChangesWithHistory(HttpContext);
-           /// _db.Entry<Student>(student).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-           
-           
+                //Safe-Delete(Logical Delete)
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                var History = _db.students.FirstOrDefault().Hs_Change;
+                var data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(History);
 
-            //_db.students.Remove(student);
-            //_db.SaveChangesWithHistory();
-            var History = _db.students.FirstOrDefault().Hs_Change;
-            var data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(History);
-            //_db.teachers.Add(new Teacher() { Level = 20, Name = "John Doe" });
-            //_db.SaveChangesWithHistory();
-            return Json(data);
+                return Json(data);
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
 
         public IActionResult About()
