@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoHistoryCore", "AutoHist
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistorySampleWebApp", "HistorySampleWebApp\HistorySampleWebApp.csproj", "{6A8B01B8-D62A-483E-A178-1906497E8A0D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScreenShot", "ScreenShot", "{E55BAD3E-3218-4716-BD75-C88F28B42713}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Pictures\result.PNG = ..\..\..\Pictures\result.PNG
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

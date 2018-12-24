@@ -21,26 +21,26 @@ namespace HistorySampleWebApp.Controllers
         }
 
       
-         [Route("api/test")]
+        // [Route("api/test")]
         public IActionResult Index()
         {
-            //using (var _db = new DatabaseContext())
-            //{
-            //    //Add Item
-            //    _db.students.Add(new Student() { age = 25, Name = "John doe" });
-            //    _db.students.Add(new Student() { age = 30, Name = "raul costa" });
-            //    _db.students.Add(new Student() { age = 35, Name = "CR 7" });
-            //    _db.SaveChangesWithHistory(HttpContext);
-            //}
-            //using (var _db = new DatabaseContext())
-            //{
-            //    //Search Object AsNotracking where IsDelete Equals false and Etc ...
-            //    var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
-            //    //Edit item
-            //    student.Name = "Eli tailor";
-            //    _db.Update(student);
-            //    _db.SaveChangesWithHistory(HttpContext);
-            //}
+            using (var _db = new DatabaseContext())
+            {
+                //Add Item
+                _db.students.Add(new Student() { age = 25, Name = "John doe" });
+                _db.students.Add(new Student() { age = 30, Name = "raul costa" });
+                _db.students.Add(new Student() { age = 35, Name = "CR 7" });
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                //Edit item
+                student.Name = "Eli tailor";
+                _db.Update(student);
+                _db.SaveChangesWithHistory(HttpContext);
+            }
             using (var _db = new DatabaseContext())
             {
                 //Search Object AsNotracking where IsDelete Equals false and Etc ...
