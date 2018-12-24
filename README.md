@@ -2,7 +2,9 @@
 AutoSaveChangeHistory
 
 
-An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and soft_delete  pattern 
+An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os,and broswer agent
+
+also, this extension support soft-delete pattern
 
 AutoHistoryCore will recording all the data changing history in each record 
 
