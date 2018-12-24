@@ -40,13 +40,24 @@ namespace AutoHistoryCore
             string ip = "";
             string os = "";
             string Browser = "";
+            string Device = "";
             try
             {
                 string userAgent = httpContext.Request.Headers["User-Agent"];
                 var uaParser = Parser.GetDefault();
                 ClientInfo c = uaParser.Parse(userAgent);
-                os = c.OS.ToString();
-                Browser = c.UserAgent.ToString();
+                Device = c.Device.ToString();
+                os = c.String;
+                Browser = c.String;
+                if (c.OS.ToString() != "Other")
+                {
+                    os = c.OS.ToString();
+                }
+                if (c.UserAgent.ToString() != "Other")
+                {
+                    Browser = c.UserAgent.ToString();
+
+                }
                 ip = httpContext.Connection.RemoteIpAddress.ToString();
                 if (ip == "::1" || ip == "127.0.0.1")
                 {
@@ -71,6 +82,7 @@ namespace AutoHistoryCore
                     {
                         AgentIp = ip,
                         AgentOs = os,
+                        Device = Device,
                         AgentBrowser = Browser,
                         DateTime = DateTime.Now,
                         State = entity.State.ToString()

@@ -10,8 +10,12 @@ namespace AutoHistoryCore
         public DateTime? DateTime { get; set; }
         public string State { get; set; }
 
+        public string Device { get; set; }
+
+
         public string AgentIp { get; set; }
         public string AgentOs { get; set; }
+
 
         public string AgentBrowser { get; set; }
     }
