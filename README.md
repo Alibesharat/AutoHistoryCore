@@ -36,8 +36,11 @@ It is easy  to use jsust following 3 steps :
     db.SaveChangesWithHistory()
     
     
- Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool
+ Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool,
  
- SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remvove(you model inherited from HistoryBaseModel) before SaveChageWithHistory()
+ here the reslt of ht_change column as json in on record :
+ ![result](https://github.com/Alibesharat/AutoHistoryCore/blob/master/result.PNG)
+ 
+ Note : SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remove(you model inherited from HistoryBaseModel) before SaveChageWithHistory()
  
  Note : If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
