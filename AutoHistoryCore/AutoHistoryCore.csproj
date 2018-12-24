@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>4.0.0</Version>
     <PackageProjectUrl>https://github.com/Alibesharat/AutoHistoryCore</PackageProjectUrl>
     <Copyright></Copyright>
     <PackageLicenseUrl>https://github.com/Alibesharat/AutoHistoryCore/blob/master/LICENSE</PackageLicenseUrl>
@@ -10,6 +10,10 @@
     <RepositoryUrl>https://github.com/Alibesharat/AutoHistoryCore</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os,and broswer agent
+
+it is also support soft-delete pattern</Description>
+    <PackageReleaseNotes>Improve Dectecting user agent</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
