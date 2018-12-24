@@ -38,4 +38,4 @@ It is easy  to use jsust following 3 steps :
  
  SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remvove(you model inherited from HistoryBaseModel) before SaveChageWithHistory()
  
- Note : If you wanna physical delete or dosent enable history tracking you must call  default savechange method 
+ Note : If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
