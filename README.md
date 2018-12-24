@@ -38,7 +38,7 @@ It is easy  to use jsust following 3 steps :
     
  Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool,
  
- here the result of ht_change column as json in on record :
+ here the result of ht_change column as json in one record :
  
   ![result](https://github.com/Alibesharat/AutoHistoryCore/blob/master/result.PNG)
  
