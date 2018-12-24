@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoHistoryCore", "AutoHistoryCore\AutoHistoryCore.csproj", "{4D1BAAF4-F69F-412A-8483-2419C47C898D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoHistoryCore", "AutoHistoryCore\AutoHistoryCore.csproj", "{4D1BAAF4-F69F-412A-8483-2419C47C898D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistorySampleWebApp", "HistorySampleWebApp\HistorySampleWebApp.csproj", "{6A8B01B8-D62A-483E-A178-1906497E8A0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistorySampleWebApp", "HistorySampleWebApp\HistorySampleWebApp.csproj", "{6A8B01B8-D62A-483E-A178-1906497E8A0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScreenShot", "ScreenShot", "{E55BAD3E-3218-4716-BD75-C88F28B42713}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Pictures\result.PNG = ..\..\..\Pictures\result.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
