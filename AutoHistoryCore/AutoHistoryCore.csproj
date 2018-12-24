@@ -6,14 +6,14 @@
     <PackageProjectUrl>https://github.com/Alibesharat/AutoHistoryCore</PackageProjectUrl>
     <Copyright></Copyright>
     <PackageLicenseUrl>https://github.com/Alibesharat/AutoHistoryCore/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageTags>Entity Framework Core, entity-framework-core, EF Data, Auto History, auto-history,Soft Delete,Soft-Delete,logical-delete,logical delete</PackageTags>
+    <PackageTags>entity-framework-core,Auto auto-history,Soft-Delete,logical-delete</PackageTags>
     <RepositoryUrl>https://github.com/Alibesharat/AutoHistoryCore</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os,and broswer agent
 
 it is also support soft-delete pattern</Description>
-    <PackageReleaseNotes>Improve Dectecting user agent</PackageReleaseNotes>
+    <PackageReleaseNotes>Improve Detecting user agent</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
