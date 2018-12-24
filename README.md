@@ -15,7 +15,7 @@ Run the following command in the Package Manager Console
     PM> Install-Package AutoHistoryCore 
 
 How To Use :
-It is easy  to use jsust following 3 steps :
+It is easy  to use just following 3 steps :
 
 1: drive your Model from HistoryBaseModel 
 
