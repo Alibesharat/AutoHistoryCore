@@ -2,7 +2,7 @@
 AutoSaveChangeHistory
 
 
-An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os,and broswer agent
+An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os and broswer agent
 
 also, this extension support soft-delete pattern
 
@@ -15,6 +15,7 @@ Run the following command in the Package Manager Console
     PM> Install-Package AutoHistoryCore 
 
 How To Use :
+
 It is easy  to use just following 3 steps :
 
 1: drive your Model from HistoryBaseModel 
@@ -33,12 +34,12 @@ It is easy  to use just following 3 steps :
 
  3: use SaveChageWithHistory Extention insted of SaveChages() Defualt methode:
  
-    db.SaveChangesWithHistory()
+    db.SaveChangesWithHistory(HttpcContext)
     
     
  Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool,
  
- here the result of ht_change column as json in one record :
+ here the result of hc_change column as json in one record :
  
   ![result](https://github.com/Alibesharat/AutoHistoryCore/blob/master/result.PNG)
  
