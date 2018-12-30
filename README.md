@@ -34,7 +34,7 @@ It is easy  to use just following 3 steps :
 
  3: use SaveChageWithHistory Extention insted of SaveChages() Defualt methode:
  
-    db.SaveChangesWithHistory(HttpcContext)
+    db.SaveChangesWithHistory(httpcContext)
     
     
  Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool,
@@ -43,6 +43,14 @@ It is easy  to use just following 3 steps :
  
   ![result](https://github.com/Alibesharat/AutoHistoryCore/blob/master/result.PNG)
  
- Note : SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remove(you model inherited from HistoryBaseModel) before SaveChageWithHistory()
+ Notes :
  
- Note : If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
+1. SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remove(you model inherited from HistoryBaseModel) before SaveChageWithHistory(httpcContext)
+ 
+2. If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
+
+3.if you wanna get undelited recored use this following linq Extentoin:
+
+ 
+   db.yourModel.undelited<yourModel>().where(... .
+ 
