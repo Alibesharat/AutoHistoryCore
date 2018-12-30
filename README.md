@@ -52,5 +52,5 @@ It is easy  to use just following 3 steps :
 3.if you wanna get undelited recored use this following linq Extentoin:
 
  
-   db.yourModel.undelited<yourModel>().where(... .
+   db.yourModel.undelited<yourModel>().where(...your statement).tolist() .
  
