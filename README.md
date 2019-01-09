@@ -32,7 +32,7 @@ It is easy  to use just following 3 steps :
       update-database
       
 
- 3: use SaveChageWithHistory Extention insted of SaveChages() Defualt methode:
+ 3: use SaveChageWithHistory Extention insted of SaveChages() Defualt method:
  
     db.SaveChangesWithHistory(httpcContext)
     
