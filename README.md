@@ -57,7 +57,8 @@ It is easy  to use just following 3 steps :
     
   Powered By:
      User Agent Parser for .Net  - Get  User Agent Info By  (https://github.com/ua-parser/uap-csharp )
-     json- serialze object  by Newtonsoft.Json(https://github.com/JamesNK/Newtonsoft.Json) 
+     
+     json- Serialization objects  by Newtonsoft.Json (https://github.com/JamesNK/Newtonsoft.Json) 
     
 
  
