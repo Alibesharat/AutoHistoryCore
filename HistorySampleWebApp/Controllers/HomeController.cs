@@ -1,39 +1,91 @@
-﻿using System;
+﻿using AutoHistoryCore;
+using HistorySampleWebApp.Models;
+using HistorySampleWebApp.Service;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HistorySampleWebApp.Models;
-using HistorySampleWebApp.Service;
-using AutoHistoryCore;
+
 
 namespace HistorySampleWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private DatabaseContext _db;
-        public HomeController(DatabaseContext databaseContext)
+
+        public HomeController()
         {
-            _db = databaseContext;
+
         }
 
-
+      
+        // [Route("api/test")]
         public IActionResult Index()
         {
-            // _db.students.Add(new Student() { age = 25, Name = "Mina" });
-            // // _db.SaveChanges();
-            // _db.SaveChangesWithHistory();
+            using (var _db = new DatabaseContext())
+            {
+                //Add Item
+                _db.students.Add(new Student() { age = 25, Name = "John doe" });
+                _db.students.Add(new Student() { age = 30, Name = "raul costa" });
+                _db.students.Add(new Student() { age = 35, Name = "CR 7" });
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                //Edit item
+                student.Name = "Eli tailor";
+                _db.Update(student);
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                //Edit item
+                student.Name = "other name";
+                _db.Update(student);
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                //Edit item
+                student.Name = "David Beckham";
+                _db.Update(student);
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                //Search Object AsNotracking where IsDelete Equals false and Etc ...
+                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                _db.students.Remove(student);
 
-            //var student= _db.students.Where(c=>c.IsDeleted==false).FirstOrDefault();
-            // student.Name = "karim";
-            // _db.Update(student);
-            // _db.SaveChangesWithHistory();
-            var data = _db.students.Undelited<Student>().Where(c=>c.Name=="Shima").ToList();
+                //soft-Delete(Logical Delete)
+                _db.SaveChangesWithHistory(HttpContext);
+            }
+            using (var _db = new DatabaseContext())
+            {
+                var History = _db.students.FirstOrDefault(c=>c.age==25)?.Hs_Change;
+                var data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(History);
 
-            //_db.teachers.Add(new Teacher() { Level = 20, Name = "John Doe" });
-            //_db.SaveChangesWithHistory();
-            return View();
+                return Json(data);
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
 
         public IActionResult About()
