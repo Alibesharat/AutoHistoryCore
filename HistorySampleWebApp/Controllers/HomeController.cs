@@ -3,7 +3,6 @@ using HistorySampleWebApp.Models;
 using HistorySampleWebApp.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
