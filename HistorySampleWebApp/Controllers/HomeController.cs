@@ -3,7 +3,6 @@ using HistorySampleWebApp.Models;
 using HistorySampleWebApp.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,7 +34,7 @@ namespace HistorySampleWebApp.Controllers
             using (var _db = new DatabaseContext())
             {
                 //Search Object AsNotracking where IsDelete Equals false and Etc ...
-                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                var student = _db.students.Undelited().FirstOrDefault(c => c.age == 25);
                 //Edit item
                 student.Name = "Eli tailor";
                 _db.Update(student);
@@ -44,7 +43,7 @@ namespace HistorySampleWebApp.Controllers
             using (var _db = new DatabaseContext())
             {
                 //Search Object AsNotracking where IsDelete Equals false and Etc ...
-                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                var student = _db.students.Undelited().FirstOrDefault(c => c.age == 25);
                 //Edit item
                 student.Name = "other name";
                 _db.Update(student);
@@ -53,7 +52,7 @@ namespace HistorySampleWebApp.Controllers
             using (var _db = new DatabaseContext())
             {
                 //Search Object AsNotracking where IsDelete Equals false and Etc ...
-                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                var student = _db.students.Undelited().FirstOrDefault(c => c.age == 25);
                 //Edit item
                 student.Name = "David Beckham";
                 _db.Update(student);
@@ -62,7 +61,7 @@ namespace HistorySampleWebApp.Controllers
             using (var _db = new DatabaseContext())
             {
                 //Search Object AsNotracking where IsDelete Equals false and Etc ...
-                var student = _db.students.Undelited<Student>().FirstOrDefault(c => c.age == 25);
+                var student = _db.students.Undelited().FirstOrDefault(c => c.age == 25);
                 _db.students.Remove(student);
 
                 //soft-Delete(Logical Delete)

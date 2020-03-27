@@ -12,13 +12,11 @@ namespace HistorySampleWebApp.Service
 {
     public class DatabaseContext : DbContext
     {
-        public static readonly LoggerFactory MyLoggerFactory
-    = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "mydb");
+            optionsBuilder.UseInMemoryDatabase(databaseName:"mydb");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Student> students { get; set; }
