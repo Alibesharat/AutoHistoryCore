@@ -1,8 +1,10 @@
 using AutoHistoryCore;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AutiHistoryCoerTest
 {
@@ -33,7 +35,12 @@ namespace AutiHistoryCoerTest
     public class DataseServicetest
     {
 
+        private readonly ITestOutputHelper _testOutputHelper;
 
+        public DataseServicetest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
 
         [Fact]
         public void Write_Read_data()
@@ -46,7 +53,9 @@ namespace AutiHistoryCoerTest
             };
             db.Add(st);
             db.SaveChangesWithHistory(null);
+        
             var savedStudent = db.Students.FirstOrDefault();
+            _testOutputHelper.WriteLine(savedStudent.Hs_Change);
             Assert.NotNull(savedStudent.Hs_Change);
         }
     }
