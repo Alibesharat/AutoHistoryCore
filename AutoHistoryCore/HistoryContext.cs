@@ -38,10 +38,10 @@ namespace AutoHistoryCore
         public static int SaveChangesWithHistory(this DbContext db, HttpContext httpContext)
         {
             var entries = db.ChangeTracker.Entries().ToArray();
-            string ip = "";
-            string os = "";
-            string Browser = "";
-            string Device = "";
+            string ip = "httpContext Not Find";
+            string os = "httpContext Not Find";
+            string Browser = "httpContext Not Find";
+            string Device = "httpContext Not Find";
             try
             {
                 string userAgent = httpContext.Request.Headers["User-Agent"];
