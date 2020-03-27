@@ -23,3 +23,5 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Deploy NuGet Package
+      run: dotnet nuget push AutoHistoryCore/bin/Release/*.nupkg -k ${{ secrets.nuget_publish }}  --skip-duplicate -s https://api.nuget.org/v3/index.json
