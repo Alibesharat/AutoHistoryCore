@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.1.2</Version>
+    <Version>4.2.1</Version>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright></Copyright>
     <PackageLicenseUrl>https://github.com/Alibesharat/AutoHistoryCore/blob/master/LICENSE</PackageLicenseUrl>
@@ -13,7 +13,7 @@
     <Description>An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os,and broswer agent
 
 it is also support soft-delete pattern</Description>
-    <PackageReleaseNotes>Improve Detecting user agent</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove NewTonsoft.json dependency</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
