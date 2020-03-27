@@ -29,7 +29,7 @@ namespace AutoHistoryCore
 
 
         /// <summary>
-        /// Save Chaange with SoftDelete Pattern(Logical Delete)
+        /// Save Change with SoftDelete Pattern(Logical Delete)
         /// Save Agent info -- OS,Broswer and IpAddres
         /// </summary>
         /// <param name="db"></param>

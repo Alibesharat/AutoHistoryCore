@@ -18,9 +18,7 @@ namespace HistorySampleWebApp.Service
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseLoggerFactory(MyLoggerFactory)
-                .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
+            optionsBuilder.UseInMemoryDatabase(databaseName: "mydb");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Student> students { get; set; }
