@@ -52,7 +52,7 @@ It is easy  to use just following 3 steps :
 3.if you wanna get undelited recored use this following linq Extention:
 
  
-    db.yourModel.undelited<yourmodel>().where(...your statement).tolist() .
+    db.yourModel.undelited().where(...your statement).tolist() .
     
     
   Powered By:
