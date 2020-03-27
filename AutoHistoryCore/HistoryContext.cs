@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using UAParser;
+
 
 namespace AutoHistoryCore
 {
-    public static class HistoryContext
+    public static class DbContextExtention
     {
         /// <summary>
-        /// رکورد های حذف نشده
+        /// UndeltedRecord
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="set"></param>
@@ -16,29 +22,83 @@ namespace AutoHistoryCore
         public static IQueryable<TEntity> Undelited<TEntity>(this DbSet<TEntity> set)
        where TEntity : HistoryBaseModel
         {
-          
             var data = set.AsNoTracking().Where(e => e.IsDeleted == false);
             return data.AsQueryable();
         }
 
-   
+
 
         /// <summary>
-        /// ثبت تفییرات کانتکس با تاریخچه
+        /// Save Chaange with SoftDelete Pattern(Logical Delete)
+        /// Save Agent info -- OS,Broswer and IpAddres
         /// </summary>
         /// <param name="db"></param>
+        /// <param name="httpContext"></param>
         /// <returns></returns>
-        public static int SaveChangesWithHistory(this DbContext db)
+        public static int SaveChangesWithHistory(this DbContext db, HttpContext httpContext)
         {
             var entries = db.ChangeTracker.Entries().ToArray();
+            string ip = "";
+            string os = "";
+            string Browser = "";
+            string Device = "";
+            try
+            {
+                string userAgent = httpContext.Request.Headers["User-Agent"];
+                var uaParser = Parser.GetDefault();
+                ClientInfo c = uaParser.Parse(userAgent);
+                Device = c.Device.ToString();
+                os = c.String;
+                Browser = c.String;
+                if (c.OS.ToString() != "Other")
+                {
+                    os = c.OS.ToString();
+                }
+                if (c.UserAgent.ToString() != "Other")
+                {
+                    Browser = c.UserAgent.ToString();
 
+                }
+                ip = httpContext.Connection.RemoteIpAddress.ToString();
+                if (ip == "::1" || ip == "127.0.0.1")
+                {
+                    ip = Dns.GetHostEntry(Dns.GetHostName())
+                        .AddressList
+                        .FirstOrDefault(C => C.AddressFamily ==
+                        System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+                }
+            }
+            catch
+            {
+
+                ;
+            }
             foreach (var entity in entries)
             {
                 try
                 {
+
                     HistoryBaseModel model = (HistoryBaseModel)entity.Entity;
+                    HistoryViewModel vm = new HistoryViewModel()
+                    {
+                        AgentIp = ip,
+                        AgentOs = os,
+                        Device = Device,
+                        AgentBrowser = Browser,
+                        DateTime = DateTime.Now,
+                        State = entity.State.ToString()
+
+                    };
+                    List<HistoryViewModel> data = new List<HistoryViewModel>();
+                    if (!string.IsNullOrWhiteSpace(model.Hs_Change))
+                    {
+                        data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(model.Hs_Change);
 
 
+                    }
+                    data.Add(vm);
+
+                    var JSON = JsonConvert.SerializeObject(data);
                     switch (entity.State)
                     {
 
@@ -48,21 +108,17 @@ namespace AutoHistoryCore
                             break;
                         case EntityState.Deleted:
                             model.IsDeleted = true;
-                            model.DeletedDatTime = DateTime.Now;
                             entity.State = EntityState.Modified;
                             break;
-
                         case EntityState.Modified:
-                            model.IsDeleted = false;
-                            model.LastEditedDateTime = DateTime.Now;
                             break;
                         case EntityState.Added:
                             model.IsDeleted = false;
-                            model.CrearedDateTime = DateTime.Now;
                             break;
                         default:
                             break;
                     }
+                    model.Hs_Change = JSON;
                 }
                 catch
                 {
@@ -77,21 +133,76 @@ namespace AutoHistoryCore
 
 
         /// <summary>
-        /// ثبت تفییرات کانتکس با تاریخچه
+        /// Save Chaange with SoftDelete Pattern(Logical Delete)
+        /// Save Agent info -- OS,Broswer and IpAddres
         /// </summary>
         /// <param name="db"></param>
+        /// <param name="httpContext"></param>
         /// <returns></returns>
-        public async static Task<int> SaveChangesWithHistoryAsync(this DbContext db)
+        public static async Task<int> SaveChangesWithHistoryAsync(this DbContext db, HttpContext httpContext)
         {
             var entries = db.ChangeTracker.Entries().ToArray();
+            string ip = "";
+            string os = "";
+            string Browser = "";
+            string Device = "";
+            try
+            {
+                string userAgent = httpContext.Request.Headers["User-Agent"];
+                var uaParser = Parser.GetDefault();
+                ClientInfo c = uaParser.Parse(userAgent);
+                Device = c.Device.ToString();
+                os = c.String;
+                Browser = c.String;
+                if (c.OS.ToString() != "Other")
+                {
+                    os = c.OS.ToString();
+                }
+                if (c.UserAgent.ToString() != "Other")
+                {
+                    Browser = c.UserAgent.ToString();
 
+                }
+                ip = httpContext.Connection.RemoteIpAddress.ToString();
+                if (ip == "::1" || ip == "127.0.0.1")
+                {
+                    ip = Dns.GetHostEntry(Dns.GetHostName())
+                        .AddressList
+                        .FirstOrDefault(C => C.AddressFamily ==
+                        System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+                }
+            }
+            catch
+            {
+
+                ;
+            }
             foreach (var entity in entries)
             {
                 try
                 {
+
                     HistoryBaseModel model = (HistoryBaseModel)entity.Entity;
+                    HistoryViewModel vm = new HistoryViewModel()
+                    {
+                        AgentIp = ip,
+                        AgentOs = os,
+                        Device = Device,
+                        AgentBrowser = Browser,
+                        DateTime = DateTime.Now,
+                        State = entity.State.ToString()
+
+                    };
+                    List<HistoryViewModel> data = new List<HistoryViewModel>();
+                    if (!string.IsNullOrWhiteSpace(model.Hs_Change))
+                    {
+                        data = JsonConvert.DeserializeObject<List<HistoryViewModel>>(model.Hs_Change);
 
 
+                    }
+                    data.Add(vm);
+
+                    var JSON = JsonConvert.SerializeObject(data);
                     switch (entity.State)
                     {
 
@@ -101,20 +212,17 @@ namespace AutoHistoryCore
                             break;
                         case EntityState.Deleted:
                             model.IsDeleted = true;
-                            model.DeletedDatTime = DateTime.Now;
                             entity.State = EntityState.Modified;
                             break;
                         case EntityState.Modified:
-                            model.IsDeleted = false;
-                            model.LastEditedDateTime = DateTime.Now;
                             break;
                         case EntityState.Added:
                             model.IsDeleted = false;
-                            model.CrearedDateTime = DateTime.Now;
                             break;
                         default:
                             break;
                     }
+                    model.Hs_Change = JSON;
                 }
                 catch
                 {
@@ -126,5 +234,7 @@ namespace AutoHistoryCore
 
             return await db.SaveChangesAsync();
         }
+
+
     }
 }
