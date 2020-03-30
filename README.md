@@ -50,7 +50,7 @@ It is easy  to use just following 3 steps :
  
 2. If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
 
-3.if you wanna get undelited recored use this following linq Extention:
+3.if you wanna get undelited recoreds use this following linq Extention:
 
  
     db.yourModel.undelited().where(...your statement).tolist() .
