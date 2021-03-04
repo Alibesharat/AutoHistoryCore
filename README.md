@@ -46,7 +46,13 @@ It is easy  to use just following 3 steps :
  
  Notes :
  
-1. SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    db.remove(you model inherited from HistoryBaseModel) before SaveChageWithHistory(httpcContext)
+1. SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    
+
+       db.remove(you model inherited from HistoryBaseModel) 
+       
+  before 
+     
+      SaveChageWithHistory(httpcContext)
  
 2. If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
 
