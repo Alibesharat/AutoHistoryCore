@@ -5,7 +5,7 @@ AutoSaveChangeHistory
 
 An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os and broswer agent
 
-also, this extension support soft-delete pattern
+also, this extension support `soft-delete` pattern
 
 AutoHistoryCore will recording all the data changing history in each record 
 
@@ -19,7 +19,7 @@ How To Use :
 
 It is easy  to use just following 3 steps :
 
-1: drive your Model from HistoryBaseModel 
+1: drive your Model from `HistoryBaseModel` 
 
     public class MyModel:HistoryBaseModel
     {
@@ -33,12 +33,12 @@ It is easy  to use just following 3 steps :
       update-database
       
 
- 3: use SaveChageWithHistory Extention insted of SaveChages() Defualt method:
+ 3: use `SaveChageWithHistory` Extention insted of SaveChages() Defualt method:
  
     db.SaveChangesWithHistory(httpcContext)
     
     
- Note : drive your model from HistoryBaseModel will be extend that by add two property : hc_change as String,  and Isdeleted as bool,
+ Note : drive your model from `HistoryBaseModel` will be extend that by add two property : `hc_change` as `String`,  and `Isdeleted` as `bool`,
  
  here the result of hc_change column as json in one record :
  
@@ -46,7 +46,7 @@ It is easy  to use just following 3 steps :
  
  Notes :
  
-1. SaveChageWithHistory provide softdelete pattern  automatically by change isdelete property as true when you call    
+1. `SaveChageWithHistory` provide `soft-delete` pattern  automatically by change `IsDelete` property as `true` when you call    
 
 
        db.remove(you model inherited from HistoryBaseModel);
