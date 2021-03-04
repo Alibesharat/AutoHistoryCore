@@ -52,7 +52,7 @@ It is easy  to use just following 3 steps :
        
   before 
      
-      SaveChageWithHistory(httpcContext)
+       SaveChageWithHistory(httpcContext)
  
 2. If you wanna physical delete or doesn't  enable history tracking you must call  default savechange method 
 
