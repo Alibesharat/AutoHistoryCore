@@ -1,7 +1,7 @@
 # AutoHistoryCore
 AutoSaveChangeHistory
 
- ![Github tags](https://github.com/Alibesharat/AutoHistoryCore/workflows/.NET%20Core/badge.svg)
+[![.NET](https://github.com/Alibesharat/AutoHistoryCore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Alibesharat/AutoHistoryCore/actions/workflows/dotnet.yml)
 
 An Extention for Microsoft.EntityFrameworkCore to support automatically recording data changes history and some addentianal info such as ip,Os and broswer agent
 
